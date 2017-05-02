@@ -21,14 +21,8 @@
     - name: restart redistribute neighbor
       command: systemctl restart rdnbrd.service
 
-- hosts: servers
+- hosts: server01
   become: yes
-  vars:
-      container_ip:
-          server01: "172.16.1"
-          server02: "172.16.1"
-          server03: "172.16.1"
-          server04: "172.16.1"
   tasks:
     - name: copy interfaces
       copy: src=config/{{ansible_hostname}}/interfaces dest=/etc/network/
@@ -46,8 +40,86 @@
     - name: build container
       command: docker build -t test_container /home/cumulus/
     - name: run container 1
-      command: docker run --net=macnetworketh1 -itd test_container
+      command: docker run --ip=172.16.1.11 --net=macnetworketh1 -itd test_container
     - name: run container 2
-      command: docker run --net=macnetworketh1 -itd test_container
+      command: docker run --ip=172.16.1.12 --net=macnetworketh1 -itd test_container
     - name: run container 3
-      command: docker run --net=macnetworketh1 -itd test_container
+      command: docker run --ip=172.16.1.13 --net=macnetworketh1 -itd test_container
+      
+      
+- hosts: server02
+  become: yes
+  tasks:
+    - name: copy interfaces
+      copy: src=config/{{ansible_hostname}}/interfaces dest=/etc/network/
+    - name: copy dockerfile
+      copy: src=config/{{ansible_hostname}}/interfaces dest=/home/cumulus/
+    - name: restarts servers with their new configuration
+      shell: sleep 1 && shutdown -r 0
+      async: 1
+      poll: 0
+      ignore_errors: true
+    - name: Wait for everything to come back up
+      local_action: wait_for port=22 host="{{ inventory_hostname }}" search_regex=OpenSSH delay=10
+    - name: create macvlan network
+      command: docker network create -d macvlan --subnet=172.16.1.0/24 --ip-range=172.16.1.0/24 --gateway=172.16.1.1 --o parent=eth2 macnetworketh2
+    - name: build container
+      command: docker build -t test_container  /home/cumulus/
+    - name: run container 1
+      command: docker run --ip=172.16.1.21 --net=macnetworketh2 -itd test_container
+    - name: run container 2
+      command: docker run --ip=172.16.1.22 --net=macnetworketh2 -itd test_container
+    - name: run container 3
+      command: docker run --ip=172.16.1.23 --net=macnetworketh2 -itd test_container
+
+- hosts: server03
+  become: yes
+  tasks:
+    - name: copy interfaces
+      copy: src=config/{{ansible_hostname}}/interfaces dest=/etc/network/
+    - name: copy dockerfile
+      copy: src=config/{{ansible_hostname}}/interfaces dest=/home/cumulus/
+    - name: restarts servers with their new configuration
+      shell: sleep 1 && shutdown -r 0
+      async: 1
+      poll: 0
+      ignore_errors: true
+    - name: Wait for everything to come back up
+      local_action: wait_for port=22 host="{{ inventory_hostname }}" search_regex=OpenSSH delay=10
+    - name: create macvlan network
+      command: docker network create -d macvlan --subnet=172.16.1.0/24 --ip-range=172.16.1.0/26 --gateway=172.16.1.1 --o parent=eth1 macnetworketh1
+    - name: build container
+      command: docker build -t test_container /home/cumulus/
+    - name: run container 1
+      command: docker run --ip=172.16.1.31 --net=macnetworketh1 -itd test_container
+    - name: run container 2
+      command: docker run --ip=172.16.1.32 --net=macnetworketh1 -itd test_container
+    - name: run container 3
+      command: docker run --ip=172.16.1.33 --net=macnetworketh1 -itd test_container
+      
+- hosts: server04
+  become: yes
+  tasks:
+    - name: copy interfaces
+      copy: src=config/{{ansible_hostname}}/interfaces dest=/etc/network/
+    - name: copy dockerfile
+      copy: src=config/{{ansible_hostname}}/interfaces dest=/home/cumulus/
+    - name: restarts servers with their new configuration
+      shell: sleep 1 && shutdown -r 0
+      async: 1
+      poll: 0
+      ignore_errors: true
+    - name: Wait for everything to come back up
+      local_action: wait_for port=22 host="{{ inventory_hostname }}" search_regex=OpenSSH delay=10
+    - name: create macvlan network
+      command: docker network create -d macvlan --subnet=172.16.1.0/24 --ip-range=172.16.1.0/24 --gateway=172.16.1.1 --o parent=eth2 macnetworketh2
+    - name: build container
+      command: docker build -t test_container  /home/cumulus/
+    - name: run container 1
+      command: docker run --ip=172.16.1.41 --net=macnetworketh2 -itd test_container
+    - name: run container 2
+      command: docker run --ip=172.16.1.42 --net=macnetworketh2 -itd test_container
+    - name: run container 3
+      command: docker run --ip=172.16.1.43 --net=macnetworketh2 -itd test_container
+     
+
