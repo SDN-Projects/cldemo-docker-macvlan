@@ -11,11 +11,14 @@ spine02
 [oob]
 oob
 
-[servers]
+[serversodd]
 server01
-server02
 server03
+
+[serverseven]
+server02
 server04
+
 
 [edge]
 edge01
