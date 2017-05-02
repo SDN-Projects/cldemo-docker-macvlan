@@ -25,10 +25,10 @@
   become: yes
   vars:
       container_ip:
-          server01: "127.16.1"
-          server02: "127.16.2"
-          server03: "127.16.3"
-          server04: "127.16.4"
+          server01: "172.16.1"
+          server02: "172.16.1"
+          server03: "172.16.1"
+          server04: "172.16.1"
   tasks:
     - name: copy interfaces
       copy: src=config/{{ansible_hostname}}/interfaces dest=/etc/network/
