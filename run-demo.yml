@@ -42,7 +42,7 @@
     - name: Wait for everything to come back up
       local_action: wait_for port=22 host="{{ inventory_hostname }}" search_regex=OpenSSH delay=10
     - name: create macvlan network
-      command: docker network create -d macvlan --subnet={{container_ip[inventory_hostname]}}.0/26 --ip-range={{container_ip[inventory_hostname]}}.0/26 --gateway={{container_ip[inventory_hostname]}}.1 --aux-address="exclude_host={{container_ip[inventory_hostname]}}.254" -o parent=eth1 macnetworketh1
+      command: docker network create -d macvlan --subnet=172.16.1.0/24 --ip-range=172.16.1.0/26 --gateway=172.16.1.1 --o parent=eth1 macnetworketh1
     - name: build container
       command: docker build -t test_container /home/cumulus/
     - name: run container 1
