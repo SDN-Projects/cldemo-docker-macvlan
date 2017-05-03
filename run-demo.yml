@@ -36,7 +36,7 @@
     - name: reload quagga
       service: name=quagga state=restarted
 
-- hosts: server
+- hosts: servers
   user: cumulus
   become: yes
   become_method: sudo
