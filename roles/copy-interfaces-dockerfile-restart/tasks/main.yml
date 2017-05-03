@@ -3,7 +3,7 @@
  - name: copy interfaces
    copy: src=config/{{ansible_hostname}}/interfaces dest=/etc/network/
  - name: copy dockerfile
-   copy: src=config/{{ansible_hostname}}/dockerfile dest=/home/cumulus/
+   copy: src=config/{{ansible_hostname}}/Dockerfile dest=/home/cumulus/
  - name: restarts servers with their new configuration
    shell: sleep 1 && shutdown -r 0
    async: 1
