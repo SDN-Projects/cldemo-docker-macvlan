@@ -122,8 +122,8 @@
 - hosts: server04
   become: yes
   tasks:
-   - name: create docker macvlan network
-     docker_network:
+    - name: create docker macvlan network
+      docker_network:
         name: server04_eth2
         driver: macvlan
         driver_options:
@@ -132,8 +132,6 @@
           subnet: 172.16.1.0/24
           gateway: 172.16.1.1
           iprange: 172.16.1.0/24
-
-      
     - name: build container
       command: docker build -t test_container  /home/cumulus/
     - name: run container 1
