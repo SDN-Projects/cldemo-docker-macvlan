@@ -36,6 +36,9 @@
     - name: reload quagga
       service: name=quagga state=restarted
 
+- hosts: server
+
+
 
 - hosts: server01
   become: yes
