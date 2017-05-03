@@ -21,10 +21,6 @@
 - hosts: leaf
   become: yes
   tasks:
- #   - name: reload networking
- #     command: ifreload -a
- #   - name: reload quagga
- #     service: name=quagga state=restarted
     - name: enable redistribute neighbor
       command: systemctl enable rdnbrd.service
     - name: start redistribute neighbor
@@ -87,11 +83,11 @@
     - name: build container
       command: docker build -t test_container  /home/cumulus/
     - name: run container 1
-      command: docker run --ip=172.16.1.21 --net=server02_eth2 -itd test_container
+      command: docker run --ip=172.16.1.21 --net=server02_eth2 -itd php:5.6-apache
     - name: run container 2
-      command: docker run --ip=172.16.1.22 --net=server02_eth2 -itd test_container
+      command: docker run --ip=172.16.1.22 --net=server02_eth2 -itd php:5.6-apache
     - name: run container 3
-      command: docker run --ip=172.16.1.23 --net=server02_eth2 -itd test_container
+      command: docker run --ip=172.16.1.23 --net=server02_eth2 -itd php:5.6-apache
 
 - hosts: server03
   become: yes
@@ -111,11 +107,11 @@
     - name: build container
       command: docker build -t test_container /home/cumulus/
     - name: run container 1
-      command: docker run --ip=172.16.1.31 --net=server03_eth1 -itd test_container
+      command: docker run --ip=172.16.1.31 --net=server03_eth1 -itd php:5.6-apache
     - name: run container 2
-      command: docker run --ip=172.16.1.32 --net=server03_eth1 -itd test_container
+      command: docker run --ip=172.16.1.32 --net=server03_eth1 -itd php:5.6-apache
     - name: run container 3
-      command: docker run --ip=172.16.1.33 --net=server03_eth1 -itd test_container
+      command: docker run --ip=172.16.1.33 --net=server03_eth1 -itd php:5.6-apache
       
 - hosts: server04
   become: yes
@@ -133,10 +129,10 @@
     - name: build container
       command: docker build -t test_container  /home/cumulus/
     - name: run container 1
-      command: docker run --ip=172.16.1.41 --net=server04_eth2 -itd test_container
+      command: docker run --ip=172.16.1.41 --net=server04_eth2 -itd php:5.6-apache
     - name: run container 2
-      command: docker run --ip=172.16.1.42 --net=server04_eth2 -itd test_container
+      command: docker run --ip=172.16.1.42 --net=server04_eth2 -itd php:5.6-apache
     - name: run container 3
-      command: docker run --ip=172.16.1.43 --net=server04_eth2 -itd test_container
+      command: docker run --ip=172.16.1.43 --net=server04_eth2 -itd php:5.6-apache
      
 
