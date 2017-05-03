@@ -79,9 +79,6 @@
           gateway: 172.16.1.1
           iprange: 172.16.1.0/24
 
-    
-    - name: build container
-      command: docker build -t test_container  /home/cumulus/
     - name: run container 1
       command: docker run --ip=172.16.1.21 --net=server02_eth2 -itd php:5.6-apache
     - name: run container 2
