@@ -37,9 +37,12 @@
       service: name=quagga state=restarted
 
 - hosts: server
-
-
-
+  user: cumulus
+  become: yes
+  become_method: sudo
+  roles:
+    - dockerifupdown2
+    
 - hosts: server01
   become: yes
   tasks:
