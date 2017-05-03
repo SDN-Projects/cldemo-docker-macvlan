@@ -17,12 +17,6 @@ server02
 server03
 server04
 
-[edge]
-edge01
-
-[inet]
-internet
-
 [network:children]
 leaf
 spine
