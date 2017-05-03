@@ -41,10 +41,12 @@
   become: yes
   become_method: sudo
   roles:
-    - dockerifupdown2
+    - installdocker_ifupdown2
     
 - hosts: server01
+  user: cumulus
   become: yes
+  become_method: sudo
   tasks:
     - name: copy interfaces
       copy: src=config/{{ansible_hostname}}/interfaces dest=/etc/network/
@@ -71,15 +73,17 @@
     - name: build container
       command: docker build -t test_container /home/cumulus/
     - name: run container 1
-      command: docker run --ip=172.16.1.11 --net=macnetworketh1 -itd test_container
+      command: docker run --ip=172.16.1.11 --net=server01_eth1 -itd test_container
     - name: run container 2
-      command: docker run --ip=172.16.1.12 --net=macnetworketh1 -itd test_container
+      command: docker run --ip=172.16.1.12 --net=server01_eth1 -itd test_container
     - name: run container 3
-      command: docker run --ip=172.16.1.13 --net=macnetworketh1 -itd test_container
+      command: docker run --ip=172.16.1.13 --net=server01_eth1 -itd test_container
       
       
 - hosts: server02
+  user: cumulus
   become: yes
+  become_method: sudo
   tasks:
     - name: copy interfaces
       copy: src=config/{{ansible_hostname}}/interfaces dest=/etc/network/
