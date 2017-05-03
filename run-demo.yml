@@ -51,7 +51,7 @@
   tasks:
     - name: create docker macvlan network
       docker_network:
-        name: {{ansible_hostname}}_eth1
+        name: "{{ansible_hostname}}"_eth1
         driver: macvlan
         driver_options:
           parent: eth1
@@ -76,7 +76,7 @@
   tasks:
     - name: create docker macvlan network
       docker_network:
-        name: {{ansible_hostname}}_eth2
+        name: "{{ansible_hostname}}"_eth2
         driver: macvlan
         driver_options:
           parent: eth2
@@ -100,7 +100,7 @@
   tasks:
     - name: create docker macvlan network
       docker_network:
-        name: {{ansible_hostname}}_eth1
+        name: "{{ansible_hostname}}"_eth1
         driver: macvlan
         driver_options:
           parent: eth1
@@ -124,7 +124,7 @@
   tasks:
    - name: create docker macvlan network
       docker_network:
-        name: {{ansible_hostname}}_eth2
+        name: "{{ansible_hostname}}"_eth2
         driver: macvlan
         driver_options:
           parent: eth2
