@@ -5,7 +5,30 @@
     - name: copy interfaces
       copy: src=config/{{ansible_hostname}}/interfaces dest=/etc/network/
     - name: copy Quagga daemons
-      copy: src=config/{{ansible_hostname}}/daemons dest=/etc/quagga/
+      copy: src=config/daemons dest=/etc/quagga/
+      
+- hosts: spine
+  become: yes
+  tasks:
+    - name: copy Quagga conf
+      copy: src=config/{{ansible_hostname}}/Quagga.conf dest=/etc/quagga/
+    - name: reload networking
+      command: ifreload -a
+    - name: reload quagga
+      service: name=quagga state=restarted
+      
+
+- hosts: leaf
+  become: yes
+  tasks:
+    - name: reload networking
+      command: ifreload -a
+    - name: reload quagga
+      service: name=quagga state=restarted
+    - name: start redistribute neighbor
+      command: systemctl enable rdnbrd.service
+    - name: restart redistribute neighbor
+      command: systemctl restart rdnbrd.service
     - name: copy Quagga conf
       copy: src=config/{{ansible_hostname}}/Quagga.conf dest=/etc/quagga/
     - name: reload networking
@@ -13,13 +36,6 @@
     - name: reload quagga
       service: name=quagga state=restarted
 
-- hosts: leaf
-  become: yes
-  tasks:
-    - name: start redistribute neighbor
-      command: systemctl enable rdnbrd.service
-    - name: restart redistribute neighbor
-      command: systemctl restart rdnbrd.service
 
 - hosts: server01
   become: yes
