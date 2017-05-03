@@ -21,14 +21,14 @@
 - hosts: leaf
   become: yes
   tasks:
-    - name: reload networking
-      command: ifreload -a
-    - name: reload quagga
-      service: name=quagga state=restarted
-    - name: start redistribute neighbor
+ #   - name: reload networking
+ #     command: ifreload -a
+ #   - name: reload quagga
+ #     service: name=quagga state=restarted
+    - name: enable redistribute neighbor
       command: systemctl enable rdnbrd.service
-    - name: restart redistribute neighbor
-      command: systemctl restart rdnbrd.service
+    - name: start redistribute neighbor
+      command: systemctl start rdnbrd.service
     - name: copy Quagga conf
       copy: src=config/{{ansible_hostname}}/Quagga.conf dest=/etc/quagga/
     - name: reload networking
