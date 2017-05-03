@@ -14,7 +14,7 @@ iface eth0 inet dhcp
 
 auto eth2
 iface eth2 inet static
-  address 172.16.2.254/26
+  address 172.16.1.252/24
   post-up ip link set $IFACE promisc on
 
 auto eth1
