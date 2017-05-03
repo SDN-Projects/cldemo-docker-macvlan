@@ -41,7 +41,7 @@
   become: yes
   become_method: sudo
   roles:
-    - installdocker_ifupdown2
+    - install-docker-ifupdown2
     
 - hosts: server01
   user: cumulus
