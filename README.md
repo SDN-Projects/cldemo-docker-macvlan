@@ -12,7 +12,7 @@ Network Topology
 ----------------
 
 [Network Topology for Docker-Macvlan demo 
-]   [enter link description here](https://github.com/Diane-cumulus/cldemo-docker-macvlan/blob/master/cldemo-docker-macvlan.jpg)
+](https://github.com/Diane-cumulus/cldemo-docker-macvlan/blob/master/cldemo-docker-macvlan.jpg)
 
 
 ----------
