@@ -12,7 +12,7 @@ Network Topology
 ----------------
 
 [Network Topology for Docker-Macvlan demo 
-](https://github.com/Diane-cumulus/cldemo-docker-macvlan/blob/master/cldemo-docker-macvlan.png)
+]   [enter link description here](https://github.com/Diane-cumulus/cldemo-docker-macvlan/blob/master/cldemo-docker-macvlan.jpg)
 
 
 ----------
@@ -106,6 +106,16 @@ Attaching to container from a server:
     root@581764bbc3d9:/# ip route show
     default via 172.16.1.1 dev eth0 
     172.16.1.0/24 dev eth0  proto kernel  scope link  src 172.16.1.12 
+
+**Remember to use CTL P CTL Q to exit the container!**
+
+
+
+
+
+
+
+
 
 **Remember to use CTL P CTL Q to exit the container!**
 
