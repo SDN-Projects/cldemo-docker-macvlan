@@ -6,8 +6,15 @@ In this solution, when containers existence are learned by the directly connecte
 
 Using this technique you can deploy containers from a single 172.16.1.0/24 subnet owned by multiple docker macvlans on different hosts and located in different racks throughout the DC.
 
-**Network Topology**
+**
 
+Network Topology
+----------------
+
+**
+
+
+----------
 
 
 This is the topology in use in this demo. Three containers are hosted on each server as shown. The leaf switch runs redistribute neighbor daemon and redistributes the ARP table into BGP. The routes then get propagated into the core.   
@@ -21,7 +28,12 @@ This demo deploys 12 containers, three on each of the four servers.
  - Server03 -- 172.16.1.31, 172.16.1.32, 172.16.1.33
  - Server04 -- 172.16.1.41, 172.16.1.42, 172.16.1.43
 
-**Software in Use for this Demo:**
+**
+
+Software in Use for this Demo
+-----------------------------
+
+:**
 
 On Spines and Leafs:
  - Cumulus v3.2.0
@@ -30,9 +42,14 @@ On Servers:
  - Ubuntu 16.04 
  - Docker-CE v17.03
 
-**Quickstart: Run the demo:**
+**
 
-Before running this demo, install VirtualBox and Vagrant. The currently supported versions of VirtualBox and Vagrant can be found on the main cldemo-vagrant documentation page under the "prequisites" section.
+Quickstart: Run the demo
+------------------------
+
+:**
+
+Before running this demo, install [VirtualBox](https://www.virtualbox.org/wiki/Download_Old_Builds) and [Vagrant](https://releases.hashicorp.com/vagrant/). The currently supported versions of VirtualBox and Vagrant can be found on the main [cldemo-vagrant](https://github.com/CumulusNetworks/cldemo-vagrant) documentation page under the "prequisites" section.
 
 Once the prequisites have been installed, proceed with the steps below.
 
@@ -50,7 +67,12 @@ Once the prequisites have been installed, proceed with the steps below.
     ansible-playbook run-demo.yml
 
 
-**Viewing the Results**
+**
+
+Viewing the Results
+-------------------
+
+**
 
 All the container /32 addresses can be seen:
 
