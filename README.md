@@ -28,12 +28,11 @@ This demo deploys 12 containers, three on each of the four servers.
  - Server03 -- 172.16.1.31, 172.16.1.32, 172.16.1.33
  - Server04 -- 172.16.1.41, 172.16.1.42, 172.16.1.43
 
-**
 
 Software in Use for this Demo
 -----------------------------
 
-:**
+
 
 On Spines and Leafs:
  - Cumulus v3.2.0
@@ -42,12 +41,12 @@ On Servers:
  - Ubuntu 16.04 
  - Docker-CE v17.03
 
-**
+
 
 Quickstart: Run the demo
 ------------------------
 
-:**
+
 
 Before running this demo, install [VirtualBox](https://www.virtualbox.org/wiki/Download_Old_Builds) and [Vagrant](https://releases.hashicorp.com/vagrant/). The currently supported versions of VirtualBox and Vagrant can be found on the main [cldemo-vagrant](https://github.com/CumulusNetworks/cldemo-vagrant) documentation page under the "prequisites" section.
 
@@ -67,12 +66,11 @@ Once the prequisites have been installed, proceed with the steps below.
     ansible-playbook run-demo.yml
 
 
-**
 
 Viewing the Results
 -------------------
 
-**
+
 
 All the container /32 addresses can be seen:
 
