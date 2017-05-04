@@ -59,11 +59,11 @@
     - name: build container
       command: docker build -t demo_container /home/cumulus/
     - name: run container 1
-      command: docker run --ip=172.16.1.11 --net=server01_eth1 -itd demo_container
+      command: docker run --ip=172.16.1.11 --net=server01_eth1 --name=server01ip172.16.1.11 -itd demo_container
     - name: run container 2
-      command: docker run --ip=172.16.1.12 --net=server01_eth1 -itd demo_container
+      command: docker run --ip=172.16.1.12 --net=server01_eth1 --name=server01ip172.16.1.12 -itd demo_container
     - name: run container 3
-      command: docker run --ip=172.16.1.13 --net=server01_eth1 -itd demo_container
+      command: docker run --ip=172.16.1.13 --net=server01_eth1 --name=server01ip172.16.1.13 -itd demo_container
       
       
 - hosts: server02
@@ -85,11 +85,11 @@
     - name: build container
       command: docker build -t demo_container /home/cumulus/
     - name: run container 1
-      command: docker run --ip=172.16.1.21 --net=server02_eth2 -itd demo_container
+      command: docker run --ip=172.16.1.21 --net=server02_eth2 --name=server02ip172.16.1.21 -itd demo_container
     - name: run container 2
-      command: docker run --ip=172.16.1.22 --net=server02_eth2 -itd demo_container
+      command: docker run --ip=172.16.1.22 --net=server02_eth2 --name=server02ip172.16.1.22 -itd demo_container
     - name: run container 3
-      command: docker run --ip=172.16.1.23 --net=server02_eth2 -itd demo_container
+      command: docker run --ip=172.16.1.23 --net=server02_eth2 --name=server02ip172.16.1.23 -itd demo_container
 
 - hosts: server03
   become: yes
@@ -109,11 +109,11 @@
     - name: build container
       command: docker build -t demo_container /home/cumulus/
     - name: run container 1
-      command: docker run --ip=172.16.1.31 --net=server03_eth1 -itd demo_container
+      command: docker run --ip=172.16.1.31 --net=server03_eth1 --name=server03ip172.16.1.31 -itd demo_container
     - name: run container 2
-      command: docker run --ip=172.16.1.32 --net=server03_eth1 -itd demo_container
+      command: docker run --ip=172.16.1.32 --net=server03_eth1 --name=server03ip172.16.1.32 -itd demo_container
     - name: run container 3
-      command: docker run --ip=172.16.1.33 --net=server03_eth1 -itd demo_container
+      command: docker run --ip=172.16.1.33 --net=server03_eth1 --name=server03ip172.16.1.33 -itd demo_container
       
 - hosts: server04
   become: yes
@@ -131,10 +131,10 @@
     - name: build container
       command: docker build -t demo_container  /home/cumulus/
     - name: run container 1
-      command: docker run --ip=172.16.1.41 --net=server04_eth2 -itd demo_container
+      command: docker run --ip=172.16.1.41 --net=server04_eth2 -itd --name=server04ip172.16.1.41 demo_container
     - name: run container 2
-      command: docker run --ip=172.16.1.42 --net=server04_eth2 -itd demo_container
+      command: docker run --ip=172.16.1.42 --net=server04_eth2 -itd --name=server04ip172.16.1.42 demo_container
     - name: run container 3
-      command: docker run --ip=172.16.1.43 --net=server04_eth2 -itd demo_container
+      command: docker run --ip=172.16.1.43 --net=server04_eth2 -itd --name=server04ip172.16.1.43 demo_container
      
 
