@@ -113,14 +113,6 @@ Attaching to container from a server:
 
 
 
-
-
-
-**Remember to use CTL P CTL Q to exit the container!**
-
-
-
-
 `
 
 
