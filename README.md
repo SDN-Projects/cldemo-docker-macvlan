@@ -1,18 +1,17 @@
-# cldemo-docker-macvlan
-
 This demo shows one of several different approaches to running Docker. This approach advertises host-routes for Docker containers which have been created on a macvlan.  No NAT is used.  Using this technique you can provide your containers with real IP addresses which are externally reachable and all ports are accepted.
 
 In this solution, when containers existence are learned by the directly connected leaf switch, an ARP entry is added.  The leaf switch redistributes the ARP table into BGP, letting other leaf switches and spine switches receive a host route to the container.  The redistribute neighbor daemon running on the leaf switches continually sends a unicast ARP to all known containers to verify it's existence.   When containers are destroyed, the unicast ARPs no longer reply, the MAC/IP address is removed from the ARP table and the host routes are removed from the advertisement.   
 
 Using this technique you can deploy containers from a single 172.16.1.0/24 subnet owned by multiple docker macvlans on different hosts and located in different racks throughout the DC.
 
-
+**
 
 Network Topology
 ----------------
+![Network Topology for Docker-Macvlan demo ](https://github.com/Diane-cumulus/cldemo-docker-macvlan/blob/master/cldemo-docker-macvlan.png)
 
 [Network Topology for Docker-Macvlan demo 
-](https://github.com/Diane-cumulus/cldemo-docker-macvlan/blob/master/cldemo-docker-macvlan.jpg)
+]   [enter link description here](https://github.com/Diane-cumulus/cldemo-docker-macvlan/blob/master/cldemo-docker-macvlan.jpg)
 
 
 ----------
@@ -29,12 +28,12 @@ This demo deploys 12 containers, three on each of the four servers.
  - Server03 -- 172.16.1.31, 172.16.1.32, 172.16.1.33
  - Server04 -- 172.16.1.41, 172.16.1.42, 172.16.1.43
 
-
+**
 
 Software in Use for this Demo
 -----------------------------
 
-
+:**
 
 On Spines and Leafs:
  - Cumulus v3.2.0
@@ -48,7 +47,7 @@ On Servers:
 Quickstart: Run the demo
 ------------------------
 
-
+:**
 
 Before running this demo, install [VirtualBox](https://www.virtualbox.org/wiki/Download_Old_Builds) and [Vagrant](https://releases.hashicorp.com/vagrant/). The currently supported versions of VirtualBox and Vagrant can be found on the main [cldemo-vagrant](https://github.com/CumulusNetworks/cldemo-vagrant) documentation page under the "prequisites" section.
 
@@ -68,11 +67,12 @@ Once the prequisites have been installed, proceed with the steps below.
     ansible-playbook run-demo.yml
 
 
-
+**
 
 Viewing the Results
 -------------------
 
+**
 
 All the container /32 addresses can be seen:
 
@@ -107,6 +107,8 @@ Attaching to container from a server:
     172.16.1.0/24 dev eth0  proto kernel  scope link  src 172.16.1.12 
 
 **Remember to use CTL P CTL Q to exit the container!**
+
+
 
 
 
