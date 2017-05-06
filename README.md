@@ -19,12 +19,12 @@ This is the topology in use in this demo. Three containers are hosted on each se
 
 This demo deploys 12 containers, three on each of the four servers.  
 
-12 "workload" containers (4 per Server) -- This container runs our workloads at different unique IP Addresses all within the same /24 subnet.
+12 "workload" containers (3 per Server) -- The containers run our workloads at different unique IP Addresses all within the same /24 subnet.  In this demo, each server is on a different rack.
 
- - Server01 -- 172.16.1.11, 172.16.1.12, 172.16.1.13 
- - Server02 -- 172.16.1.21, 172.16.1.22, 172.16.1.23 
- - Server03 -- 172.16.1.31, 172.16.1.32, 172.16.1.33
- - Server04 -- 172.16.1.41, 172.16.1.42, 172.16.1.43
+ - Server01 -- 172.16.1.11/24, 172.16.1.12/24, 172.16.1.13/24 
+ - Server02 -- 172.16.1.21/24, 172.16.1.22/24, 172.16.1.23/24 
+ - Server03 -- 172.16.1.31/24, 172.16.1.32/24, 172.16.1.33/24
+ - Server04 -- 172.16.1.41/24, 172.16.1.42/24, 172.16.1.43/24
 
 **
 
