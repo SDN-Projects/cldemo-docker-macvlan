@@ -13,8 +13,8 @@ iface swp2
 
 auto swp1
 iface swp1
-  address 172.16.1.1
-  post-up ip link set $IFACE promisc on
+  address 172.16.1.1/24
+  post-up echo 1 > /proc/sys/net/ipv4/conf/swp1/proxy_arp
 
 auto swp51
 iface swp51

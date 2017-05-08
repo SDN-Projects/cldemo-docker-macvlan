@@ -4,8 +4,27 @@
   tasks:
     - name: copy interfaces
       copy: src=config/{{ansible_hostname}}/interfaces dest=/etc/network/
-    #- name: copy Quagga daemons
-    #  copy: src=config/{{ansible_hostname}}/daemons dest=/etc/quagga/
+    - name: copy Quagga daemons
+      copy: src=config/daemons dest=/etc/quagga/
+      
+- hosts: spine
+  become: yes
+  tasks:
+    - name: copy Quagga conf
+      copy: src=config/{{ansible_hostname}}/Quagga.conf dest=/etc/quagga/
+    - name: reload networking
+      command: ifreload -a
+    - name: reload quagga
+      service: name=quagga state=restarted
+      
+
+- hosts: leaf
+  become: yes
+  tasks:
+    - name: enable redistribute neighbor
+      command: systemctl enable rdnbrd.service
+    - name: start redistribute neighbor
+      command: systemctl start rdnbrd.service
     - name: copy Quagga conf
       copy: src=config/{{ansible_hostname}}/Quagga.conf dest=/etc/quagga/
     - name: reload networking
@@ -13,41 +32,109 @@
     - name: reload quagga
       service: name=quagga state=restarted
 
-- hosts: leaf
-  become: yes
-  tasks:
-    - name: start redistribute neighbor
-      command: systemctl enable rdnbrd.service
-    - name: restart redistribute neighbor
-      command: systemctl restart rdnbrd.service
-
 - hosts: servers
+  user: cumulus
   become: yes
-  vars:
-      container_ip:
-          server01: "127.16.1"
-          server02: "127.16.2"
-          server03: "127.16.3"
-          server04: "127.16.4"
+  become_method: sudo
+  roles:
+    - install-docker-ifupdown2
+    - copy-interfaces-dockerfile-restart
+    
+- hosts: server01
+  user: cumulus
+  become: yes
+  become_method: sudo
   tasks:
-    - name: copy interfaces
-      copy: src=config/{{ansible_hostname}}/interfaces dest=/etc/network/
-    - name: copy dockerfile
-      copy: src=config/{{ansible_hostname}}/interfaces dest=/home/cumulus/
-    - name: restarts servers with their new configuration
-      shell: sleep 1 && shutdown -r 0
-      async: 1
-      poll: 0
-      ignore_errors: true
-    - name: Wait for everything to come back up
-      local_action: wait_for port=22 host="{{ inventory_hostname }}" search_regex=OpenSSH delay=10
-    - name: create macvlan network
-      command: docker network create -d macvlan --subnet={{container_ip[inventory_hostname]}}.0/26 --ip-range={{container_ip[inventory_hostname]}}.0/26 --gateway={{container_ip[inventory_hostname]}}.1 --aux-address="exclude_host={{container_ip[inventory_hostname]}}.254" -o parent=eth1 macnetworketh1
+    - name: create docker macvlan network
+      docker_network:
+        name: server01_eth1
+        driver: macvlan
+        driver_options:
+          parent: eth1
+        ipam_options: 
+          subnet: 172.16.1.0/24
+          gateway: 172.16.1.1
+          iprange: 172.16.1.0/24
+
     - name: build container
-      command: docker build -t test_container /home/cumulus/
+      command: docker build -t demo_container /home/cumulus/
     - name: run container 1
-      command: docker run --net=macnetworketh1 -itd test_container
+      command: docker run --ip=172.16.1.11 --net=server01_eth1 --name=server01-172.16.1.11 -itd demo_container
     - name: run container 2
-      command: docker run --net=macnetworketh1 -itd test_container
+      command: docker run --ip=172.16.1.12 --net=server01_eth1 --name=server01-172.16.1.12 -itd demo_container
     - name: run container 3
-      command: docker run --net=macnetworketh1 -itd test_container
+      command: docker run --ip=172.16.1.13 --net=server01_eth1 --name=server01-172.16.1.13 -itd demo_container
+      
+      
+- hosts: server02
+  user: cumulus
+  become: yes
+  become_method: sudo
+  tasks:
+    - name: create docker macvlan network
+      docker_network:
+        name: server02_eth2
+        driver: macvlan
+        driver_options:
+          parent: eth2
+        ipam_options: 
+          subnet: 172.16.1.0/24
+          gateway: 172.16.1.1
+          iprange: 172.16.1.0/24
+
+    - name: build container
+      command: docker build -t demo_container /home/cumulus/
+    - name: run container 1
+      command: docker run --ip=172.16.1.21 --net=server02_eth2 --name=server02-172.16.1.21 -itd demo_container
+    - name: run container 2
+      command: docker run --ip=172.16.1.22 --net=server02_eth2 --name=server02-172.16.1.22 -itd demo_container
+    - name: run container 3
+      command: docker run --ip=172.16.1.23 --net=server02_eth2 --name=server02-172.16.1.23 -itd demo_container
+
+- hosts: server03
+  become: yes
+  tasks:
+    - name: create docker macvlan network
+      docker_network:
+        name: server03_eth1
+        driver: macvlan
+        driver_options:
+          parent: eth1
+        ipam_options: 
+          subnet: 172.16.1.0/24
+          gateway: 172.16.1.1
+          iprange: 172.16.1.0/24
+          
+          
+    - name: build container
+      command: docker build -t demo_container /home/cumulus/
+    - name: run container 1
+      command: docker run --ip=172.16.1.31 --net=server03_eth1 --name=server03-172.16.1.31 -itd demo_container
+    - name: run container 2
+      command: docker run --ip=172.16.1.32 --net=server03_eth1 --name=server03-172.16.1.32 -itd demo_container
+    - name: run container 3
+      command: docker run --ip=172.16.1.33 --net=server03_eth1 --name=server03-172.16.1.33 -itd demo_container
+      
+- hosts: server04
+  become: yes
+  tasks:
+    - name: create docker macvlan network
+      docker_network:
+        name: server04_eth2
+        driver: macvlan
+        driver_options:
+          parent: eth2
+        ipam_options: 
+          subnet: 172.16.1.0/24
+          gateway: 172.16.1.1
+          iprange: 172.16.1.0/24
+    - name: build container
+      command: docker build -t demo_container  /home/cumulus/
+    - name: run container 1
+      command: docker run --ip=172.16.1.41 --net=server04_eth2 -itd --name=server04-172.16.1.41 demo_container
+    - name: run container 2
+      command: docker run --ip=172.16.1.42 --net=server04_eth2 -itd --name=server04-172.16.1.42 demo_container
+    - name: run container 3
+      command: docker run --ip=172.16.1.43 --net=server04_eth2 -itd --name=server04-172.16.1.43 demo_container
+     
+

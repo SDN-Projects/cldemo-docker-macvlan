@@ -17,5 +17,5 @@ iface eth2 inet manual
 
 auto eth1
 iface eth1 inet static 
-  address 172.16.1.254/26
+  address 172.16.1.251/24
   post-up ip link set $IFACE promisc on
