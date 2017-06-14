@@ -19,3 +19,4 @@ auto eth1
 iface eth1 inet static 
   address 172.16.1.251/24
   post-up ip link set $IFACE promisc on
+  mtu 9216
