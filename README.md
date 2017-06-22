@@ -37,7 +37,7 @@ On Spines and Leafs:
 
 On Servers:
  - Ubuntu 16.04 
- - Docker-CE v17.03
+ - Docker-CE v17.05
 
 
 
