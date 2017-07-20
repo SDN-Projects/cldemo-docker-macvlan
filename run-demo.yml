@@ -6,6 +6,7 @@
     - copy_interfaces
     - copy_quagga_daemons
     - restart_switches
+    - mv_ntp_mgmt_vrf
 
 
 
