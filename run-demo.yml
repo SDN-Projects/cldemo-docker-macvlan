@@ -1,11 +1,22 @@
 ---
+
 - hosts: network
   become: yes
-  tasks:
-    - name: copy interfaces
-      copy: src=config/{{ansible_hostname}}/interfaces dest=/etc/network/
-    - name: copy Quagga daemons
-      copy: src=config/daemons dest=/etc/quagga/
+  roles:
+    - copy_interfaces
+    - copy_quagga_daemons
+    - restart switches
+
+
+
+
+#- hosts: network
+#  become: yes
+#  tasks:
+#    - name: copy interfaces
+#      copy: src=config/{{ansible_hostname}}/interfaces dest=/etc/network/
+#    - name: copy Quagga daemons
+#      copy: src=config/daemons dest=/etc/quagga/
       
 - hosts: spine
   become: yes
