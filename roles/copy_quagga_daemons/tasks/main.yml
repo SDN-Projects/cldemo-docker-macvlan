@@ -1,0 +1,3 @@
+---
+  - name: copy Quagga daemons
+    copy: src=config/daemons dest=/etc/quagga/
