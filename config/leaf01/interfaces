@@ -7,7 +7,7 @@ iface lo inet loopback
 
 auto eth0
 iface eth0 inet dhcp
-   vrf eth0
+   vrf mgmt
    
 auto mgmt
 iface mgmt
