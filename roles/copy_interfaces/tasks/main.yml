@@ -1,3 +1,10 @@
 ---
   - name: copy interfaces
     copy: src=config/{{ansible_hostname}}/interfaces dest=/etc/network/
+    
+   #- name: Bring Loopback Interface Up
+   #  shell: "ifup lo"
+
+   #- name: Bring Neighbor Interfaces Up
+   #  shell: "ifup {{item}}"
+   #  with_items: "{{ interfaces[inventory_hostname].neighbors }}"
