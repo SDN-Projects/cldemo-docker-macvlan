@@ -6,13 +6,13 @@ iface lo inet loopback
   address 10.0.0.12/32
 
 auto eth0
-iface eth0 inet dhcp
-   vrf mgmt
+iface eth0 inet dhcp#
+#   vrf mgmt
    
-auto mgmt
-iface mgmt
-   address 127.0.0.1/8
-   vrf-table auto
+#auto mgmt
+#iface mgmt
+#   address 127.0.0.1/8
+#   vrf-table auto
 
 auto swp2
 iface swp2 inet static
