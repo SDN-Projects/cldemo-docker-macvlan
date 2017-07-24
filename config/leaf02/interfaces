@@ -6,7 +6,7 @@ iface lo inet loopback
   address 10.0.0.12/32
 
 auto eth0
-iface eth0 inet dhcp#
+iface eth0 inet dhcp
 #   vrf mgmt
    
 #auto mgmt
