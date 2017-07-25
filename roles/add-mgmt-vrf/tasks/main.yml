@@ -10,4 +10,4 @@
   ignore_errors: true
 
 - name: Reconnect to switches 
-  local_action: wait_for port=22 host="{{ inventory_hostname }}" search_regex=OpenSSH delay=1
+  local_action: wait_for port=22 host="{{ inventory_hostname }}" search_regex=OpenSSH delay=10
