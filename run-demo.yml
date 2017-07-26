@@ -5,7 +5,7 @@
   roles:
     - copy_interfaces
     - copy_quagga_daemons
-    - add-mgmt-vrf
+    - restart_switches
     - mv_ntp_mgmt_vrf
 
 
