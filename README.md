@@ -48,7 +48,7 @@ Quickstart: Run the demo
 
 
 
-Before running this demo, install [VirtualBox](https://www.virtualbox.org/wiki/Download_Old_Builds) and [Vagrant](https://releases.hashicorp.com/vagrant/). The currently supported versions of VirtualBox and Vagrant can be found on the main [cldemo-vagrant](https://github.com/CumulusNetworks/cldemo-vagrant) documentation page under the "prequisites" section.
+Before running this demo, install [VirtualBox](https://www.virtualbox.org/wiki/Download_Old_Builds) and [Vagrant](https://releases.hashicorp.com/vagrant/). The currently supported versions of VirtualBox and Vagrant can be found on the main [cldemo-vagrant](https://github.com/CumulusNetworks/cldemo-vagrant) documentation page in the "prequisites" section.
 
 Once the prequisites have been installed, proceed with the steps below.
 
@@ -64,6 +64,8 @@ Once the prequisites have been installed, proceed with the steps below.
     
     git clone  https://github.com/CumulusNetworks/cldemo-docker-macvlan
 
+    cd cldemo-docker-macvlan
+    
     ansible-playbook run-demo.yml
 
 
