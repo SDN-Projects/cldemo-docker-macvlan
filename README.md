@@ -35,7 +35,7 @@ Software in Use for this Demo
 
 
 On Spines and Leafs:
- - Cumulus v3.2.0
+ - Cumulus v3.3.0
 
 On Servers:
  - Ubuntu 16.04 
