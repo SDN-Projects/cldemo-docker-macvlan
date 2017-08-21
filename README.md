@@ -26,6 +26,8 @@ This demo deploys 12 containers, three on each of the four servers.
  - Server03 -- 172.16.1.31/24, 172.16.1.32/24, 172.16.1.33/24
  - Server04 -- 172.16.1.41/24, 172.16.1.42/24, 172.16.1.43/24
 
+Each workload container identifies itself by sending a ping to it's local leaf switch interface.
+
 
 Software in Use for this Demo
 -----------------------------
