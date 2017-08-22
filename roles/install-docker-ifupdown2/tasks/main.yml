@@ -8,7 +8,7 @@
 - name: Install Docker, Ifupdown2 and PIP
   apt: name={{item}} state=installed update_cache=yes
   with_items:
-    - docker-engine
+    - docker-ce
     - ifupdown2
     - python-pip
 
