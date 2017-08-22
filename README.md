@@ -8,7 +8,7 @@ Using this technique you can deploy containers from a single 172.16.1.0/24 subne
 
 Network Topology
 ----------------
-![Network Topology for Docker-Macvlan demo ](https://github.com/Diane-cumulus/cldemo-docker-macvlan/blob/master/cldemo-docker-macvlan.png)
+![Network Topology for Docker-Macvlan demo ](https://github.com/CumulusNetworks/cldemo-docker-macvlan/blob/master/cldemo-docker-macvlan.png)
 
 
 
