@@ -80,46 +80,44 @@ All the container /32 addresses can be seen:
 
 From spine:
 
+   
     cumulus@spine01:mgmt-vrf:~$ net show route
+    
+    show ip route
+    =============
+    Codes: K - kernel route, C - connected, S - static, R - RIP,
+           O - OSPF, I - IS-IS, B - BGP, P - PIM, T - Table, v - VNC,
+           V - VPN,
+           > - selected route, * - FIB route
+    B>* 10.0.0.11/32 [20/0] via fe80::4638:39ff:fe00:53, swp1, 00:32:57
+    B>* 10.0.0.12/32 [20/0] via fe80::4638:39ff:fe00:28, swp2, 00:32:57
+    B>* 10.0.0.13/32 [20/0] via fe80::4638:39ff:fe00:4f, swp3, 00:32:57
+    B>* 10.0.0.14/32 [20/0] via fe80::4638:39ff:fe00:3b, swp4, 00:32:57
+    C>* 10.0.0.21/32 is directly connected, lo
+    B>* 172.16.1.11/32 [20/0] via fe80::4638:39ff:fe00:53, swp1, 00:22:14
+    B>* 172.16.1.12/32 [20/0] via fe80::4638:39ff:fe00:53, swp1, 00:22:13
+    B>* 172.16.1.13/32 [20/0] via fe80::4638:39ff:fe00:53, swp1, 00:22:13
+    B>* 172.16.1.21/32 [20/0] via fe80::4638:39ff:fe00:28, swp2, 00:17:05
+    B>* 172.16.1.22/32 [20/0] via fe80::4638:39ff:fe00:28, swp2, 00:17:05
+    B>* 172.16.1.23/32 [20/0] via fe80::4638:39ff:fe00:28, swp2, 00:17:04
+    B>* 172.16.1.31/32 [20/0] via fe80::4638:39ff:fe00:4f, swp3, 00:11:12
+    B>* 172.16.1.32/32 [20/0] via fe80::4638:39ff:fe00:4f, swp3, 00:11:12
+    B>* 172.16.1.33/32 [20/0] via fe80::4638:39ff:fe00:4f, swp3, 00:11:11
+    B>* 172.16.1.41/32 [20/0] via fe80::4638:39ff:fe00:3b, swp4, 00:04:12
+    B>* 172.16.1.42/32 [20/0] via fe80::4638:39ff:fe00:3b, swp4, 00:04:12
+    B>* 172.16.1.43/32 [20/0] via fe80::4638:39ff:fe00:3b, swp4, 00:04:11
+    
+    show ipv6 route
+    =================
+    Codes: K - kernel route, C - connected, S - static, R - RIPng,
+     O - OSPFv6, I - IS-IS, B - BGP, T - Table, v - VNC,
+     V - VPN,
+     > - selected route, * - FIB route
+     C * fe80::/64 is directly connected, swp4
+     C * fe80::/64 is directly connected, swp3
+     C * fe80::/64 is directly connected, swp2
+     C>* fe80::/64 is directly connected, swp1
 
-show ip route
-=============
-Codes: K - kernel route, C - connected, S - static, R - RIP,
-       O - OSPF, I - IS-IS, B - BGP, P - PIM, T - Table, v - VNC,
-       V - VPN,
-       > - selected route, * - FIB route
-
-B>* 10.0.0.11/32 [20/0] via fe80::4638:39ff:fe00:53, swp1, 00:32:57
-B>* 10.0.0.12/32 [20/0] via fe80::4638:39ff:fe00:28, swp2, 00:32:57
-B>* 10.0.0.13/32 [20/0] via fe80::4638:39ff:fe00:4f, swp3, 00:32:57
-B>* 10.0.0.14/32 [20/0] via fe80::4638:39ff:fe00:3b, swp4, 00:32:57
-C>* 10.0.0.21/32 is directly connected, lo
-B>* 172.16.1.11/32 [20/0] via fe80::4638:39ff:fe00:53, swp1, 00:22:14
-B>* 172.16.1.12/32 [20/0] via fe80::4638:39ff:fe00:53, swp1, 00:22:13
-B>* 172.16.1.13/32 [20/0] via fe80::4638:39ff:fe00:53, swp1, 00:22:13
-B>* 172.16.1.21/32 [20/0] via fe80::4638:39ff:fe00:28, swp2, 00:17:05
-B>* 172.16.1.22/32 [20/0] via fe80::4638:39ff:fe00:28, swp2, 00:17:05
-B>* 172.16.1.23/32 [20/0] via fe80::4638:39ff:fe00:28, swp2, 00:17:04
-B>* 172.16.1.31/32 [20/0] via fe80::4638:39ff:fe00:4f, swp3, 00:11:12
-B>* 172.16.1.32/32 [20/0] via fe80::4638:39ff:fe00:4f, swp3, 00:11:12
-B>* 172.16.1.33/32 [20/0] via fe80::4638:39ff:fe00:4f, swp3, 00:11:11
-B>* 172.16.1.41/32 [20/0] via fe80::4638:39ff:fe00:3b, swp4, 00:04:12
-B>* 172.16.1.42/32 [20/0] via fe80::4638:39ff:fe00:3b, swp4, 00:04:12
-B>* 172.16.1.43/32 [20/0] via fe80::4638:39ff:fe00:3b, swp4, 00:04:11
-
-
-show ipv6 route
-===============
-Codes: K - kernel route, C - connected, S - static, R - RIPng,
-       O - OSPFv6, I - IS-IS, B - BGP, T - Table, v - VNC,
-       V - VPN,
-       > - selected route, * - FIB route
-
-C * fe80::/64 is directly connected, swp4
-C * fe80::/64 is directly connected, swp3
-C * fe80::/64 is directly connected, swp2
-C>* fe80::/64 is directly connected, swp1
-1 
 
 
 Attaching to container from a server:
